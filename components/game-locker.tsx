@@ -1,54 +1,56 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { PlusCircle, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { GameCard } from "@/components/game-card"
-import { AddGameDialog } from "@/components/add-game-dialog"
-import { getGames } from "@/lib/actions"
-import type { Game } from "@/lib/types"
+import { useEffect, useState } from "react";
+import { PlusCircle, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { GameCard } from "@/components/game-card";
+import { AddGameDialog } from "@/components/add-game-dialog";
+import { getGames } from "@/lib/actions";
+import type { Game } from "@/lib/types";
 
 export function GameLocker() {
-  const [games, setGames] = useState<Game[]>([])
-  const [searchQuery, setSearchQuery] = useState("")
-  const [isAddGameOpen, setIsAddGameOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [games, setGames] = useState<Game[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isAddGameOpen, setIsAddGameOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadGames() {
       try {
-        setIsLoading(true)
-        const fetchedGames = await getGames()
-        setGames(fetchedGames)
-        setError(null)
+        setIsLoading(true);
+        const fetchedGames = await getGames();
+        setGames(fetchedGames);
+        setError(null);
       } catch (err) {
-        console.error("Error loading games:", err)
-        setError("Failed to load games. Please try again.")
+        console.error("Error loading games:", err);
+        setError("Failed to load games. Please try again.");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
 
-    loadGames()
-  }, [])
+    loadGames();
+  }, []);
 
   const refreshGames = async () => {
     try {
-      setIsLoading(true)
-      const fetchedGames = await getGames()
-      setGames(fetchedGames)
-      setError(null)
+      setIsLoading(true);
+      const fetchedGames = await getGames();
+      setGames(fetchedGames);
+      setError(null);
     } catch (err) {
-      console.error("Error refreshing games:", err)
-      setError("Failed to refresh games. Please try again.")
+      console.error("Error refreshing games:", err);
+      setError("Failed to refresh games. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
-  const filteredGames = games.filter((game) => game.title.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="space-y-6">
@@ -70,8 +72,8 @@ export function GameLocker() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-12 border rounded-lg bg-muted/20">
-          <p className="text-muted-foreground">Loading games...</p>
+        <div className="flex justify-center items-center h-[90vh] md:h-auto">
+          <span className="w-12 h-12 border-4 border-black border-b-transparent rounded-full inline-block box-border animate-spin"></span>
         </div>
       ) : error ? (
         <div className="text-center py-12 border rounded-lg bg-red-50">
@@ -83,7 +85,9 @@ export function GameLocker() {
       ) : filteredGames.length === 0 ? (
         <div className="text-center py-12 border rounded-lg bg-muted/20">
           <p className="text-muted-foreground">
-            {searchQuery ? "No games match your search." : "No games found. Add some games to your locker!"}
+            {searchQuery
+              ? "No games match your search."
+              : "No games found. Add some games to your locker!"}
           </p>
         </div>
       ) : (
@@ -94,7 +98,11 @@ export function GameLocker() {
         </div>
       )}
 
-      <AddGameDialog open={isAddGameOpen} onOpenChange={setIsAddGameOpen} onSuccess={refreshGames} />
+      <AddGameDialog
+        open={isAddGameOpen}
+        onOpenChange={setIsAddGameOpen}
+        onSuccess={refreshGames}
+      />
     </div>
-  )
+  );
 }
