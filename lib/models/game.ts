@@ -1,11 +1,11 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema } from "mongoose";
 
 export interface GameDocument extends mongoose.Document {
-  title: string
-  coverImage: string
-  platform: string
-  genre: string
-  addedDate: string
+  title: string;
+  coverImage: string;
+  platform: string;
+  genre: string;
+  addedDate: string;
 }
 
 const GameSchema = new Schema<GameDocument>({
@@ -29,7 +29,8 @@ const GameSchema = new Schema<GameDocument>({
     type: String,
     default: () => new Date().toISOString(),
   },
-})
+});
 
 // Check if the model is already defined to prevent overwriting during hot reloads
-export const Game = mongoose.models.Game || mongoose.model<GameDocument>("Game", GameSchema)
+export const Game =
+  mongoose.models.Game || mongoose.model<GameDocument>("Games", GameSchema);

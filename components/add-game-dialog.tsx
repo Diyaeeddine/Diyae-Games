@@ -66,14 +66,18 @@ export function AddGameDialog({ open, onOpenChange, onSuccess }: AddGameDialogPr
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
             {error && (
-              <div className="p-3 text-sm bg-red-50 border border-red-200 text-red-600 rounded-md">{error}</div>
+              <div className="p-3 text-sm bg-red-50 border border-red-200 text-red-600 rounded-md">
+                {error}
+              </div>
             )}
             <div className="grid gap-2">
               <Label htmlFor="title">Game Title</Label>
               <Input
                 id="title"
                 value={newGame.title}
-                onChange={(e) => setNewGame({ ...newGame, title: e.target.value })}
+                onChange={(e) =>
+                  setNewGame({ ...newGame, title: e.target.value })
+                }
                 required
               />
             </div>
@@ -84,15 +88,21 @@ export function AddGameDialog({ open, onOpenChange, onSuccess }: AddGameDialogPr
                 type="url"
                 placeholder="https://example.com/game-cover.jpg"
                 value={newGame.coverImage}
-                onChange={(e) => setNewGame({ ...newGame, coverImage: e.target.value })}
+                onChange={(e) =>
+                  setNewGame({ ...newGame, coverImage: e.target.value })
+                }
               />
-              <p className="text-xs text-muted-foreground">Leave empty to use placeholder image</p>
+              <p className="text-xs text-muted-foreground">
+                Leave empty to use placeholder image
+              </p>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="platform">Platform</Label>
               <Select
                 value={newGame.platform}
-                onValueChange={(value) => setNewGame({ ...newGame, platform: value })}
+                onValueChange={(value) =>
+                  setNewGame({ ...newGame, platform: value })
+                }
                 required
               >
                 <SelectTrigger id="platform">
@@ -102,10 +112,15 @@ export function AddGameDialog({ open, onOpenChange, onSuccess }: AddGameDialogPr
                   <SelectItem value="PC">PC</SelectItem>
                   <SelectItem value="PlayStation 5">PlayStation 5</SelectItem>
                   <SelectItem value="PlayStation 4">PlayStation 4</SelectItem>
-                  <SelectItem value="Xbox Series X/S">Xbox Series X/S</SelectItem>
+                  <SelectItem value="Xbox Series X/S">
+                    Xbox Series X/S
+                  </SelectItem>
                   <SelectItem value="Xbox One">Xbox One</SelectItem>
-                  <SelectItem value="Nintendo Switch">Nintendo Switch</SelectItem>
+                  <SelectItem value="Nintendo Switch">
+                    Nintendo Switch
+                  </SelectItem>
                   <SelectItem value="Mobile">Mobile</SelectItem>
+                  <SelectItem value="All">All</SelectItem>
                   <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
@@ -114,7 +129,9 @@ export function AddGameDialog({ open, onOpenChange, onSuccess }: AddGameDialogPr
               <Label htmlFor="genre">Genre</Label>
               <Select
                 value={newGame.genre}
-                onValueChange={(value) => setNewGame({ ...newGame, genre: value })}
+                onValueChange={(value) =>
+                  setNewGame({ ...newGame, genre: value })
+                }
                 required
               >
                 <SelectTrigger id="genre">
@@ -151,5 +168,5 @@ export function AddGameDialog({ open, onOpenChange, onSuccess }: AddGameDialogPr
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
