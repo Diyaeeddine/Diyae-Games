@@ -87,7 +87,7 @@ export function GameLocker() {
           <p className="text-muted-foreground">
             {searchQuery
               ? "No games match your search."
-              : "No games found. Add some games to your locker!"}
+              : "No games found."}
           </p>
         </div>
       ) : (

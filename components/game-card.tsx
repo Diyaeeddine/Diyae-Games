@@ -1,24 +1,25 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Download } from "lucide-react"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import type { Game } from "@/lib/types"
+import Image from "next/image";
+import { Download } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import type { Game } from "@/lib/types";
 
 interface GameCardProps {
-  game: Game
-  onUpdate?: () => void
+  game: Game;
+  onUpdate?: () => void;
 }
+import "@/styles/scroll-animation.css";
 
 export function GameCard({ game, onUpdate }: GameCardProps) {
   const handleInstall = () => {
     // You can implement actual installation logic here
-    alert(`Installing ${game.title}...`)
-  }
+    alert(`Installing ${game.title}...`);
+  };
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-md">
+    <Card className="card-scroll-animate card-load-animate overflow-hidden transition-all hover:shadow-sm cursor-pointer">
       <div className="h-48 w-full relative overflow-hidden">
         <Image
           src={game.coverImage || "/placeholder.svg?height=300&width=200"}
@@ -31,8 +32,25 @@ export function GameCard({ game, onUpdate }: GameCardProps) {
       <CardContent className="p-4">
         <h3 className="font-semibold text-lg line-clamp-1">{game.title}</h3>
         <div className="text-sm text-muted-foreground space-y-1 mt-1">
-          <p>{game.platform}</p>
-          <p>{game.genre}</p>
+          <p>
+            <b>Platform:</b>{" "}
+            {game.platform.map((platform, index) => (
+              <span key={platform}>
+                {platform}
+                {index < game.platform.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
+
+          <p>
+            <b>Genre:</b>{" "}
+            {game.genre.map((genre, index) => (
+              <span key={genre}>
+                {genre}
+                {index < game.genre.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex justify-between items-center">
