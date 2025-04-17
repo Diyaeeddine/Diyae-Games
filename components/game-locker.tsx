@@ -8,6 +8,7 @@ import { GameCard } from "@/components/game-card";
 import { AddGameDialog } from "@/components/add-game-dialog";
 import { getGames } from "@/lib/actions";
 import type { Game } from "@/lib/types";
+import Footer from "./footer";
 
 export function GameLocker() {
   const [games, setGames] = useState<Game[]>([]);
@@ -53,9 +54,9 @@ export function GameLocker() {
   );
 
   return (
-    <div className="space-y-6 mb-[70px]">
+    <div className="space-y-6 ">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <div className="relative w-full sm:w-72">
+        <div className="relative left-0 w-full sm:w-72 ml-auto">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
@@ -65,10 +66,6 @@ export function GameLocker() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <Button onClick={() => setIsAddGameOpen(true)}>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Add Game
-        </Button>
       </div>
 
       {isLoading ? (
@@ -95,6 +92,8 @@ export function GameLocker() {
           ))}
         </div>
       )}
+
+      {!isLoading && !error && <Footer />}
 
       <AddGameDialog
         open={isAddGameOpen}

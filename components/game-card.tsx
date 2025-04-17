@@ -14,8 +14,7 @@ import "@/styles/scroll-animation.css";
 
 export function GameCard({ game, onUpdate }: GameCardProps) {
   const handleInstall = () => {
-    // You can implement actual installation logic here
-    alert(`Installing ${game.title}...`);
+    alert(`My OGAds link.\nDowwnloading ${game.title}...`);
   };
 
   return (
