@@ -53,7 +53,7 @@ export function GameLocker() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mb-[70px]">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
         <div className="relative w-full sm:w-72">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -85,9 +85,7 @@ export function GameLocker() {
       ) : filteredGames.length === 0 ? (
         <div className="text-center py-12 border rounded-lg bg-muted/20">
           <p className="text-muted-foreground">
-            {searchQuery
-              ? "No games match your search."
-              : "No games found."}
+            {searchQuery ? "No games match your search." : "No games found."}
           </p>
         </div>
       ) : (

@@ -1,23 +1,20 @@
 import Image from "next/image";
-
+import "../styles/globals.css";
 export default function Header() {
   return (
-    <div
-      className="mb-3  flex justify-center"
-      style={{
-        borderBottom: "4px solid transparent",
-        borderImage: "linear-gradient(to right, #FBBF24, #FFFFFF) 1",
-        paddingBottom: "20px", // Adjust padding to control the space between the image and the border
-      }}
-    >
-      <Image
-        src="/assets/images/logo.jpg"
-        alt="Logo"
-        width={170}
-        height={85}
-        layout="intrinsic"
-        className=""
-      />
-    </div>
+    <>
+      <div className="relative mb-3 pb-5">
+        <Image
+          src="/assets/images/logo.jpg"
+          alt="Logo"
+          width={200}
+          height={100}
+          layout="intrinsic"
+          className=""
+        />
+
+        <div className="absolute bottom-0 w-[200px] h-1 animate-border-oklch rounded-sm" />
+      </div>
+    </>
   );
 }
